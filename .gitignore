@@ -1,0 +1,4 @@
+.DS_Store
+example/www/phonegap/*
+example/ios/exampleWizBootStrap.xcodeproj/xcuserdata/*
+example/ios/exampleWizBootStrap.xcodeproj/project.xcworkspace/*
