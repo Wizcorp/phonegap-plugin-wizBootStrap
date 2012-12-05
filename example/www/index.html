@@ -73,15 +73,19 @@
         window.wizBootStrap.load( filename, false );
     }
     
-    function downloadThenBootStrapFromURL(url) {
+    function downloadThenBootStrapFromURL(url, user, pass) {
         var request = new XMLHttpRequest();
-        var usertextbox = document.getElementById('usertextbox');
-        var passtextbox = document.getElementById('passtextbox');
+        if ( arguments.length < 2 ) {
+            user = document.getElementById('usertextbox').value;
+        }
+        if ( arguments.length < 3 ) {
+            pass = document.getElementById('passtextbox').value;
+        }
         
         alert( 'Requesting: ' + url );
         
         // Issue a synchronous request using false parameter.
-        request.open('GET', url, false, usertextbox.value, passtextbox.value);
+        request.open('GET', url, false, user, pass);
         try {
             request.send();
         } catch (e) {
