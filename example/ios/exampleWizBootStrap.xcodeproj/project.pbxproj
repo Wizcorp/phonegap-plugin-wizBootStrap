@@ -23,7 +23,6 @@
 		F696EC2E16660A6B0092344B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F696EC2D16660A6B0092344B /* CoreMedia.framework */; };
 		F696EC3416660A6B0092344B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F696EC3216660A6B0092344B /* InfoPlist.strings */; };
 		F696EC3616660A6B0092344B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F696EC3516660A6B0092344B /* main.m */; };
-		F696EC3916660A6B0092344B /* Cordova.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F696EC3816660A6B0092344B /* Cordova.framework */; };
 		F696EC3E16660A6C0092344B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F696EC3C16660A6C0092344B /* Localizable.strings */; };
 		F696EC4D16660A6C0092344B /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F696EC4C16660A6C0092344B /* icon.png */; };
 		F696EC4F16660A6C0092344B /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F696EC4E16660A6C0092344B /* icon@2x.png */; };
@@ -37,6 +36,7 @@
 		F696EC6316660A6C0092344B /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F696EC6216660A6C0092344B /* MainViewController.xib */; };
 		F696EC7716660D390092344B /* www in Resources */ = {isa = PBXBuildFile; fileRef = F696EC7616660D390092344B /* www */; };
 		F696EC7B16660E720092344B /* WizBootStrap.m in Sources */ = {isa = PBXBuildFile; fileRef = F696EC7A16660E720092344B /* WizBootStrap.m */; };
+		F6BBAF901671D04A00C28616 /* Cordova.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6BBAF8F1671D04A00C28616 /* Cordova.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +59,6 @@
 		F696EC3316660A6B0092344B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F696EC3516660A6B0092344B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F696EC3716660A6B0092344B /* exampleWizBootStrap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "exampleWizBootStrap-Prefix.pch"; sourceTree = "<group>"; };
-		F696EC3816660A6B0092344B /* Cordova.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cordova.framework; path = /Users/Shared/Cordova/Frameworks/Cordova.framework; sourceTree = "<absolute>"; };
 		F696EC3D16660A6C0092344B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F696EC4C16660A6C0092344B /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Resources/icons/icon.png; sourceTree = "<group>"; };
 		F696EC4E16660A6C0092344B /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "Resources/icons/icon@2x.png"; sourceTree = "<group>"; };
@@ -78,6 +77,7 @@
 		F696EC7616660D390092344B /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../www; sourceTree = "<group>"; };
 		F696EC7916660E720092344B /* WizBootStrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizBootStrap.h; sourceTree = "<group>"; };
 		F696EC7A16660E720092344B /* WizBootStrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizBootStrap.m; sourceTree = "<group>"; };
+		F6BBAF8F1671D04A00C28616 /* Cordova.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cordova.framework; path = Frameworks/Cordova.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6BBAF901671D04A00C28616 /* Cordova.framework in Frameworks */,
 				F696EC1616660A6B0092344B /* Foundation.framework in Frameworks */,
 				F696EC1816660A6B0092344B /* UIKit.framework in Frameworks */,
 				F696EC1A16660A6B0092344B /* CoreGraphics.framework in Frameworks */,
@@ -98,7 +99,6 @@
 				F696EC2A16660A6B0092344B /* SystemConfiguration.framework in Frameworks */,
 				F696EC2C16660A6B0092344B /* MobileCoreServices.framework in Frameworks */,
 				F696EC2E16660A6B0092344B /* CoreMedia.framework in Frameworks */,
-				F696EC3916660A6B0092344B /* Cordova.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +133,7 @@
 		F696EC1416660A6B0092344B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F6BBAF8F1671D04A00C28616 /* Cordova.framework */,
 				F696EC1516660A6B0092344B /* Foundation.framework */,
 				F696EC1716660A6B0092344B /* UIKit.framework */,
 				F696EC1916660A6B0092344B /* CoreGraphics.framework */,
@@ -153,7 +154,6 @@
 		F696EC2F16660A6B0092344B /* exampleWizBootStrap */ = {
 			isa = PBXGroup;
 			children = (
-				F696EC3816660A6B0092344B /* Cordova.framework */,
 				F696EC3A16660A6B0092344B /* Resources */,
 				F696EC5B16660A6C0092344B /* Classes */,
 				F696EC6416660A6C0092344B /* Plugins */,
@@ -452,7 +452,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = /Users/Shared/Cordova/Frameworks;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "exampleWizBootStrap/exampleWizBootStrap-Prefix.pch";
@@ -482,7 +482,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = /Users/Shared/Cordova/Frameworks;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Frameworks\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "exampleWizBootStrap/exampleWizBootStrap-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
