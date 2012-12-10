@@ -75,9 +75,18 @@
     
     function downloadThenBootStrapFromURL(url, user, pass) {
         var request = new XMLHttpRequest();
+        
+        if (url.length < 1) {
+            alert("Please input a url to use this feature.");
+            return;
+        }
+        
+        // If user wasn't specified in function call, read it from text box.
         if ( arguments.length < 2 ) {
             user = document.getElementById('usertextbox').value;
         }
+        
+        // If pass wasn't specified in function call, read it from text box.
         if ( arguments.length < 3 ) {
             pass = document.getElementById('passtextbox').value;
         }
@@ -85,7 +94,15 @@
         alert( 'Requesting: ' + url );
         
         // Issue a synchronous request using false parameter.
-        request.open('GET', url, false, user, pass);
+        if ( user.length < 1 ) {
+            // No user specified, issue w/o user/pass
+            request.open('GET', url, false);
+        } else {
+            // Issue w/ user and pass.
+            // Note: If pass came from textbox it may be empty however
+            //       empty password "" is valid - Basic Auth Standards RFC 2617
+            request.open('GET', url, false, user, pass);
+        }
         try {
             request.send();
         } catch (e) {
