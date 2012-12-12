@@ -81,26 +81,19 @@
             return;
         }
         
-        // If user wasn't specified in function call, read it from text box.
-        if ( arguments.length < 2 ) {
-            user = document.getElementById('usertextbox').value;
-        }
-        
-        // If pass wasn't specified in function call, read it from text box.
-        if ( arguments.length < 3 ) {
-            pass = document.getElementById('passtextbox').value;
-        }
-        
         alert( 'Requesting: ' + url );
         
         // Issue a synchronous request using false parameter.
-        if ( user.length < 1 ) {
+        if ( !user || user.length < 1 ) {
             // No user specified, issue w/o user/pass
             request.open('GET', url, false);
         } else {
             // Issue w/ user and pass.
-            // Note: If pass came from textbox it may be empty however
+            // Note: If pass was not provided use empty password
             //       empty password "" is valid - Basic Auth Standards RFC 2617
+            if ( !pass ) {
+                pass = '';
+            }
             request.open('GET', url, false, user, pass);
         }
         try {
@@ -154,8 +147,16 @@
     <input type="button" id="red_button" value="Switch to red.html" onclick="bootstrap('red.html')" />
     <input type="button" id="greed_button" value="Switch to green.html" onclick="bootstrap('green.html')" />
     <input type="button" id="wiz_button" value="Switch to http://www.wizcorp.jp by file URI" onclick="downloadThenBootStrapFromURL('http://www.wizcorp.jp')" />
-    <input type="button" id="test_button" value="Switch to http://test.webdav.org/auth-basic by file URI" onclick="downloadThenBootStrapFromURL('http://test.webdav.org/auth-basic')" />
-    <input type="button" id="custom_button" value="Switch to custom URL by file URI" onclick="downloadThenBootStrapFromURL(document.getElementById('urltextbox').value)" />
+    <input type="button" id="test_button" value="Switch to http://test.webdav.org/auth-basic by file URI"
+        onclick="downloadThenBootStrapFromURL(
+                    'http://test.webdav.org/auth-basic',
+                    document.getElementById('usertextbox').value,
+                    document.getElementById('passtextbox').value)" />
+    <input type="button" id="custom_button" value="Switch to custom URL by file URI"
+        onclick="downloadThenBootStrapFromURL(
+                    document.getElementById('urltextbox').value,
+                    document.getElementById('usertextbox').value,
+                    document.getElementById('passtextbox').value)" />
       <br />
       Custom URL:
       <input type="text" id="urltextbox" value="http://" />
