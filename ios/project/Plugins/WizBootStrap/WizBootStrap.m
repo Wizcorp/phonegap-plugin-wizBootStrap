@@ -29,12 +29,12 @@
     [super dealloc];
 }
 
--(void)load:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+-(void)load:(CDVInvokedUrlCommand*)command
 {
     // If the show splash parameter was specified, use that to decide to show the splash screen.
-    // Otherwise, use the AutoHideSplashScreen from the Cordova.plist to decide.
-    NSString *fileString = [arguments objectAtIndex:1];
-    NSNumber *showSplashScreen = [arguments objectAtIndex:2];
+    // Otherwise, use the AutoHideSplashScreen from the config.xml to decide.
+    NSString *fileString = [command.arguments objectAtIndex:0];
+    NSNumber *showSplashScreen = [command.arguments objectAtIndex:1];
     
     CDVViewController *myViewController = (CDVViewController *)self.viewController;
     NSString *startFilePath = [myViewController.commandDelegate pathForResource:fileString];
@@ -54,10 +54,10 @@
     }
 }
 
--(void)loadFromFileURI:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+-(void)loadFromFileURI:(CDVInvokedUrlCommand*)command
 {
-    NSString *startFilePath = [arguments objectAtIndex:1];
-    NSNumber *showSplashScreen = [arguments objectAtIndex:2];
+    NSString *startFilePath = [command.arguments objectAtIndex:0];
+    NSNumber *showSplashScreen = [command.arguments objectAtIndex:1];
     
     [self load:startFilePath withSplashScreen:showSplashScreen];
 }
@@ -75,13 +75,7 @@
     if ( ![showSplashScreen isEqual:[NSNull null]] ) {
         show = [showSplashScreen boolValue];
     } else {
-        // Path to the Cordova.plist (in the application bundle)
-        NSString *path = [[NSBundle mainBundle] pathForResource:
-                          @"Cordova" ofType:@"plist"];
-        
-        // Build dictionary from the plist
-        NSMutableDictionary *cordovaConfig = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-        show  = [[cordovaConfig objectForKey:@"AutoHideSplashScreen"] boolValue];
+        show = [[((CDVViewController *)self.viewController).settings objectForKey:@"AutoHideSplashScreen"] boolValue];
     }
 
     if ( show ) {
