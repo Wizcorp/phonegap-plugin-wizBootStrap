@@ -7,15 +7,11 @@
  */ 
 
 #import <Foundation/Foundation.h>
-#ifdef CORDOVA_FRAMEWORK
 #import <Cordova/CDVPlugin.h>
-#else
-#import "CDVPlugin.h"
-#endif
 
 @interface WizBootStrap : CDVPlugin
 
--(void)load:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
--(void)loadFromFileURI:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+-(void)load:(CDVInvokedUrlCommand*)command;
+-(void)loadFromFileURI:(CDVInvokedUrlCommand*)command;
 
 @end
