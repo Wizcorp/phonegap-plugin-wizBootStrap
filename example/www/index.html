@@ -57,7 +57,30 @@
 	
 	function onBodyLoad() {
 		document.addEventListener("deviceready", onDeviceReady, false);
+        
+        // setup last used
+		if (typeof(window.localStorage) !== 'undefined' ) {
+			var customSettings = JSON.parse(localStorage.getItem("__customSettings"));
+			if (typeof(customSettings.url) !== 'undefined') {
+				document.getElementById('urltextbox').value = customSettings.url;
+			}
+			if (typeof(customSettings.user) !== 'undefined') {
+				document.getElementById('usertextbox').value = customSettings.user;
+			}
+			if (typeof(customSettings.pass) !== 'undefined') {
+				document.getElementById('passtextbox').value = customSettings.pass;
+			}
+		}
 	}
+        
+    function storeSettings() {
+        var settings = {
+            url: document.getElementById('urltextbox').value,
+            user: document.getElementById('usertextbox').value,
+            pass: document.getElementById('passtextbox').value
+        };
+        window.localStorage.setItem("__customSettings", JSON.stringify(settings));
+    }
 	
 	/* When this function is called, Cordova has been initialized and is ready to roll */
 	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
@@ -69,73 +92,7 @@
         }        
 	}
 
-    function bootstrap(filename) {
-        window.wizBootStrap.load( filename, false );
-    }
-    
-    function downloadThenBootStrapFromURL(url, user, pass) {
-        var request = new XMLHttpRequest();
-        
-        if (url.length < 1) {
-            alert("Please input a url to use this feature.");
-            return;
-        }
-        
-        alert( 'Requesting: ' + url );
-        
-        // Issue a synchronous request using false parameter.
-        if ( !user || user.length < 1 ) {
-            // No user specified, issue w/o user/pass
-            request.open('GET', url, false);
-        } else {
-            // Issue w/ user and pass.
-            // Note: If pass was not provided use empty password
-            //       empty password "" is valid - Basic Auth Standards RFC 2617
-            if ( !pass ) {
-                pass = '';
-            }
-            request.open('GET', url, false, user, pass);
-        }
-        try {
-            request.send();
-        } catch (e) {
-            alert('An exception was triggered.  Please verify the server exists and try your request again.');
-            return;
-        }
-        
-        // Synchronous handling.
-        if (request.status == 200) {
-            window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
-        } else if (request.status == 401) {
-            alert("Incorrect username and/or password.");
-        } else {
-            alert("Request status: " + request.status + "\n\nRequest response text: " + request.responseText);
-        }
-                
-        function gotFS(fileSystem) {
-            fileSystem.root.getFile("tmp.html", {create: true}, gotFileEntry, fail);
-        }
-        
-        function gotFileEntry(fileEntry) {
-            fileEntry.createWriter(gotFileWriter, fail);
-            alert( 'Created: ' + fileEntry.fullPath
-                  +'\nNow will reboot using the file.');
-            window.wizBootStrap.loadFromFileURI( fileEntry.fullPath, false );
-        }
-        
-        function gotFileWriter(writer) {
-            writer.onwrite = function(evt) {
-                console.log("write success");
-            };
-            writer.write( request.responseText );
-        }
-        
-        function fail(error) {
-            var errorObject = JSON.stringify( evt );
-            console.log( 'Error: ' + errorObject );
-            alert( 'Error: ' + errorObject );
-        }
-    }    
+ 
     
     </script>
   </head>
@@ -144,16 +101,16 @@
     <p>Experiment by pressing the buttons to change which html file is active.<br />
     <p>This is index.html.<br />
     <br />
-    <input type="button" id="red_button" value="Switch to red.html" onclick="bootstrap('red.html')" />
-    <input type="button" id="greed_button" value="Switch to green.html" onclick="bootstrap('green.html')" />
-    <input type="button" id="wiz_button" value="Switch to http://www.wizcorp.jp by file URI" onclick="downloadThenBootStrapFromURL('http://www.wizcorp.jp')" />
+    <input type="button" id="red_button" value="Switch to red.html" onclick="storeSettings(); wizBootStrap.bootstrap('red.html')" />
+    <input type="button" id="greed_button" value="Switch to green.html" onclick="storeSettings(); wizBootStrap.bootstrap('green.html')" />
+    <input type="button" id="wiz_button" value="Switch to http://www.wizcorp.jp by file URI" onclick="storeSettings(); wizBootStrap.downloadThenBootStrapFromURL('http://www.wizcorp.jp')" />
     <input type="button" id="test_button" value="Switch to http://test.webdav.org/auth-basic by file URI"
-        onclick="downloadThenBootStrapFromURL(
+        onclick="storeSettings(); wizBootStrap.downloadThenBootStrapFromURL(
                     'http://test.webdav.org/auth-basic',
                     'user3',
                     'user3')" />
     <input type="button" id="custom_button" value="Switch to custom URL by file URI"
-        onclick="downloadThenBootStrapFromURL(
+        onclick="storeSettings(); wizBootStrap.downloadThenBootStrapFromURL(
                     document.getElementById('urltextbox').value,
                     document.getElementById('usertextbox').value,
                     document.getElementById('passtextbox').value)" />
