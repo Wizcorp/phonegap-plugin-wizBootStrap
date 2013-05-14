@@ -4,11 +4,12 @@
 # PLUGIN: 
 
 phonegap-plugin-wizBootStrap<br />
-version : 2.4<br />
+version : 2.5<br />
 last update : 14/05/2013<br />
 
 
 # CHANGELOG: 
+- Updated to Cordova 2.5.
 - Updated to Cordova 2.4.
 - Updated to Cordova 2.3.
 - Initial version.
