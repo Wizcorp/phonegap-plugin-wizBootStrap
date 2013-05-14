@@ -27,19 +27,18 @@ var wizBootStrap = {
         var request = new XMLHttpRequest();
         if ( arguments.length < 2 ) {
             user = document.getElementById('usertextbox').value;
-            if ( window.localStorage ) {
-	            window.localStorage.setItem('user', document.getElementById('usertextbox').value);
-	        }
         }
         if ( arguments.length < 3 ) {
             pass = document.getElementById('passtextbox').value;
-            if ( window.localStorage ) {
-                window.localStorage.setItem('pass', document.getElementById('passtextbox').value);
-            }
         }
-        
+
         if ( window.localStorage ) {
-                window.localStorage.setItem('url', document.getElementById('urltextbox').value);
+        	window.localStorage.setItem('__wizBootSettings', 
+        								JSON.stringify({ 
+        									user: document.getElementById('usertextbox').value,
+        									pass: document.getElementById('passtextbox').value,
+        									url: document.getElementById('urltextbox').value
+        								}));
         }
         
         // alert( 'Requesting: ' + url );
@@ -97,4 +96,3 @@ var wizBootStrap = {
         
     } 
 };
-
