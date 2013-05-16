@@ -33,7 +33,7 @@
 	-->
 	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
 
-	<script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova-2.7.0.js"></script>
     <script type="text/javascript" charset="utf-8" src="phonegap/plugin/wizBootStrap/wizBootStrap.js"></script>
     <script type="text/javascript">
 
@@ -60,7 +60,7 @@
         
         // setup last used
 		if (typeof(window.localStorage) !== 'undefined' ) {
-			var customSettings = JSON.parse(localStorage.getItem("__customSettings"));
+			var customSettings = JSON.parse(localStorage.getItem("__wizBootSettings"));
 			if (typeof(customSettings.url) !== 'undefined') {
 				document.getElementById('urltextbox').value = customSettings.url;
 			}
@@ -72,15 +72,6 @@
 			}
 		}
 	}
-        
-    function storeSettings() {
-        var settings = {
-            url: document.getElementById('urltextbox').value,
-            user: document.getElementById('usertextbox').value,
-            pass: document.getElementById('passtextbox').value
-        };
-        window.localStorage.setItem("__customSettings", JSON.stringify(settings));
-    }
 	
 	/* When this function is called, Cordova has been initialized and is ready to roll */
 	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
@@ -89,7 +80,7 @@
 	function onDeviceReady() {
 		if (!window.wizBootStrap) {
             alert("Could not find wizBootStrap");
-        }        
+        }
 	}
 
  
@@ -101,16 +92,16 @@
     <p>Experiment by pressing the buttons to change which html file is active.<br />
     <p>This is index.html.<br />
     <br />
-    <input type="button" id="red_button" value="Switch to red.html" onclick="storeSettings(); wizBootStrap.bootstrap('red.html')" />
-    <input type="button" id="greed_button" value="Switch to green.html" onclick="storeSettings(); wizBootStrap.bootstrap('green.html')" />
-    <input type="button" id="wiz_button" value="Switch to http://www.wizcorp.jp by file URI" onclick="storeSettings(); wizBootStrap.downloadThenBootStrapFromURL('http://www.wizcorp.jp')" />
+    <input type="button" id="red_button" value="Switch to red.html" onclick="wizBootStrap.bootstrap('red.html')" />
+    <input type="button" id="greed_button" value="Switch to green.html" onclick="wizBootStrap.bootstrap('green.html')" />
+    <input type="button" id="wiz_button" value="Switch to http://www.wizcorp.jp by file URI" onclick="wizBootStrap.downloadThenBootStrapFromURL('http://www.wizcorp.jp')" />
     <input type="button" id="test_button" value="Switch to http://test.webdav.org/auth-basic by file URI"
-        onclick="storeSettings(); wizBootStrap.downloadThenBootStrapFromURL(
+        onclick="wizBootStrap.downloadThenBootStrapFromURL(
                     'http://test.webdav.org/auth-basic',
                     'user3',
                     'user3')" />
     <input type="button" id="custom_button" value="Switch to custom URL by file URI"
-        onclick="storeSettings(); wizBootStrap.downloadThenBootStrapFromURL(
+        onclick="wizBootStrap.downloadThenBootStrapFromURL(
                     document.getElementById('urltextbox').value,
                     document.getElementById('usertextbox').value,
                     document.getElementById('passtextbox').value)" />
