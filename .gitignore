@@ -15,5 +15,6 @@ example/android/out/*
 # Eclipse
 example/android/bin/*
 example/android/gen/*
-
-
+*.classpath
+*.properties
+*..project
