@@ -1,96 +1,98 @@
 
 
 
-# PLUGIN: 
+# phonegap-plugin-wizBootStrap 
 
-phonegap-plugin-wizBootStrap<br />
-version : 2.7<br />
-last update : 14/05/2013<br />
+Cordova version : 2.7<br />
+last update : 22/07/2013<br />
 
-
-# CHANGELOG: 
-- Updated to Cordova 2.7.
-- Updated to Cordova 2.6.
-- Updated to Cordova 2.5.
-- Updated to Cordova 2.4.
-- Updated to Cordova 2.3.
-- Initial version.
-
-
-# KNOWN ISSUES:
-- None.
-
-
-# DESCRIPTION :
+## Description
 
 PhoneGap plugin for bootstrapping or loading a different html page/execution
 environment.  This plugin allows for loading an html page from a remote server
 or from an applications www directory.
 
+## Install (iOS)
 
-# INSTALL (iOS): #
+Project tree
 
-Project tree<br />
+		www
+			/ phonegap
+				/ plugin
+					/ wizBootStrap
+						/ wizBootStrap.js	
+		ios
+			/ project
+				/ Plugins
+					/ WizBootStrap
+						/ WizBootStrap.h
+						/ WizBootStrap.m
 
-<pre><code>
-www
-	/ phonegap
-		/ plugin
-			/ wizBootStrap
-				/ wizBootStrap.js	
- ios
-	/ project
-		/ Plugins
-			/ WizBootStrap
-				/ WizBootStrap.h
-				/ WizBootStrap.m
 
-</code></pre>
 
 1 ) Arrange files to structure seen above.
 
-2 ) Add to Cordova.plist in the plugins array:<br />
-- Key : wizBootStrap<br />
-- Type : String<br />
-- Value : wizBootStrap<br />
+2 ) Add to config.xml in the plugins array:
 
-3 ) Add \<script\> tag to your index.html<br />
-- \<script type="text/javascript" charset="utf-8" src="phonegap/plugin/wizBootStrap/wizBootStrap.js"\>\</script\><br />
+		Key : wizBootStrap
+		Type : String
+		Value : wizBootStrap
+
+3 ) Add ```<script>``` tag to your index.html
+
+ 		<script type="text/javascript" charset="utf-8" src="phonegap/plugin/wizBootStrap/wizBootStrap.js"></script>
 
 4 ) Follow example code below.
 
+## Install (Android)
 
-# EXAMPLE CODE : #
+Project tree
 
-Loading a new html page from a relative filename<br />
-<pre><code>
-wizBootStrap.load(String fileName, Boolean true/false);
+		/ assets
+			/ www
+				/ phonegap
+					/ plugin
+						/ wizBootStrap
+							/ wizBootStrap.js	
+		/ src
+			/ jp 
+				/ wizcorp 
+					/ phonegap 
+						/ plugin
+							/ wizBootStrap
+								/ WizBootStrap.java
 
-* Restart the cordova app using fileName as the Cordova startPage.
-*   The fileName paramter is interpreted as a file name relative to the Cordova
-*   www folder name.
-*
-* If a boolean value of true is passed, the splash screen will be shown.
-* If a boolean value of false is passed, the splash screen will not be shown.
-* If a boolean value is not provided:
-*   If the AutoHideSplashScreen key is set to YES in the Cordova.plist file.
-*   Otherwise, the splash screen will not be shown.
+1 ) Arrange files to structure seen above.
 
-</code></pre>
+2 ) Add to config.xml in the plugins array:
 
-<br />
-Loading a new html page from a file URI<br />
-<pre><code>
-wizBootStrap.loadFromFileURI(String fileuri, Boolean true/false);
+		<plugin name="WizBootStrap" value="jp.wizcorp.phonegap.plugin.wizBootStrap.WizBootStrap"/>
 
-* Restart the cordova app using fileuri as the Cordova startPage.
-*   The fileuri parameter is interpreted as an absolute file URI name.
-*
-* If a boolean value of true is passed, the splash screen will be shown.
-* If a boolean value of false is passed, the splash screen will not be shown.
-* If a boolean value is not provided:
-*   If the AutoHideSplashScreen key is set to YES in the Cordova.plist file.
-*   Otherwise, the splash screen will not be shown.
+3 ) Add ```<script>``` tag to your index.html
 
-</code></pre>
+ 		<script type="text/javascript" charset="utf-8" src="phonegap/plugin/wizBootStrap/wizBootStrap.js"></script>
 
+4 ) Follow example code below.
+
+## Example Code
+
+**Loading a new html page from a relative filename**
+
+Restart the cordova app using fileName as the Cordova startPage.
+		
+		wizBootStrap.load(String fileName, Boolean true/false);
+
+The fileName parameter is interpreted as a file name relative to the Cordova www folder name.
+
+- If a boolean value of true is passed, the splash screen will be shown.
+- If a boolean value of false is passed, the splash screen will not be shown.
+
+**Loading a new html page from a file URI**
+Restart the cordova app using fileuri as the Cordova startPage.
+
+		wizBootStrap.loadFromFileURI(String fileuri, Boolean true/false);
+
+The fileuri parameter is interpreted as an absolute file URI name. (eg. file:///)
+
+- If a boolean value of true is passed, the splash screen will be shown.
+- If a boolean value of false is passed, the splash screen will not be shown.
