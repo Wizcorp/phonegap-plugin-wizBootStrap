@@ -22,17 +22,14 @@
 <widget>
     <preference name="KeyboardDisplayRequiresUserAction" value="true" />
     <preference name="KeyboardShrinksView" value="false" />
-    <preference name="KeyboardShrinksView" value="false" />
     <preference name="SuppressesIncrementalRendering" value="false" />
     <preference name="DisallowOverscroll" value="false" />
     <preference name="HideKeyboardFormAccessoryBar" value="false" />
     <preference name="TopActivityIndicator" value="gray" />
-    <preference name="EnableLocation" value="false" /><!-- DEPRECATED --><!-- DEPRECATED -->
+    <preference name="EnableLocation" value="false" /><!-- DEPRECATED -->
     <preference name="EnableViewportScale" value="false" />
     <preference name="AutoHideSplashScreen" value="true" />
     <preference name="ShowSplashScreenSpinner" value="true" />
-    <preference name="FadeSplashScreen" value="true" />
-    <preference name="FadeSplashScreenDuration" value="2" />
     <preference name="FadeSplashScreen" value="true" />
     <preference name="FadeSplashScreenDuration" value="2" />
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
@@ -47,7 +44,6 @@
         <plugin name="Camera" value="CDVCamera" />
         <plugin name="NetworkStatus" value="CDVConnection" />
         <plugin name="Contacts" value="CDVContacts" />
-        <plugin name="Debug Console" value="CDVDebugConsole" />
         <plugin name="Echo" value="CDVEcho" />
         <plugin name="File" value="CDVFile" />
         <plugin name="FileTransfer" value="CDVFileTransfer" />
