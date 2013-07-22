@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<!--
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+-->
+  <head>
+  <title></title>
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+	<meta charset="utf-8">
+
+
+	<!-- iPad/iPhone specific css below, add after your main css >
+	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
+	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
+	-->
+	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+
+	<script type="text/javascript" charset="utf-8" src="cordova-2.7.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="phonegap/plugin/wizBootStrap/wizBootStrap.js"></script>
+    <script type="text/javascript">
+
+
+	// If you want to prevent dragging, uncomment this section
+	/*
+	function preventBehavior(e) { 
+      e.preventDefault(); 
+    };
+	document.addEventListener("touchmove", preventBehavior, false);
+	*/
+	
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
+	/*
+	function handleOpenURL(url) {
+		// TODO: do something with the url passed in.
+	}
+	*/
+	
+	function onBodyLoad() {
+		document.addEventListener("deviceready", onDeviceReady, false);
+        
+        // setup last used
+		if (typeof(window.localStorage) !== 'undefined' ) {
+			var customSettings = JSON.parse(localStorage.getItem("__customSettings"));
+			if (typeof(customSettings.url) !== 'undefined') {
+				document.getElementById('urltextbox').value = customSettings.url;
+			}
+			if (typeof(customSettings.user) !== 'undefined') {
+				document.getElementById('usertextbox').value = customSettings.user;
+			}
+			if (typeof(customSettings.pass) !== 'undefined') {
+				document.getElementById('passtextbox').value = customSettings.pass;
+			}
+		}
+	}
+        
+    function storeSettings() {
+        var settings = {
+            url: document.getElementById('urltextbox').value,
+            user: document.getElementById('usertextbox').value,
+            pass: document.getElementById('passtextbox').value
+        };
+        window.localStorage.setItem("__customSettings", JSON.stringify(settings));
+    }
+	
+	/* When this function is called, Cordova has been initialized and is ready to roll */
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
+	function onDeviceReady() {
+	    setTimeout(function() {
+            window.navigator.splashscreen.hide();
+        }, 1500);
+		if (!window.wizBootStrap) {
+            alert("Could not find wizBootStrap");
+        }        
+	}
+
+ 
+    
+    </script>
+  </head>
+  <body onload="onBodyLoad()">
+	<h1>wizBootStrap plugin!</h1>
+    <p>Experiment by pressing the buttons to change which html file is active.<br />
+    <p>This is index.html.<br />
+    <br />
+    <input type="button" id="red_button" value="Switch to red.html" onclick="storeSettings(); wizBootStrap.bootstrap('red.html')" />
+    <input type="button" id="greed_button" value="Switch to green.html" onclick="storeSettings(); wizBootStrap.bootstrap('green.html')" />
+    <input type="button" id="wiz_button" value="Switch to http://www.wizcorp.jp by file URI" onclick="storeSettings(); wizBootStrap.downloadThenBootStrapFromURL('http://www.wizcorp.jp')" />
+    <input type="button" id="test_button" value="Switch to http://test.webdav.org/auth-basic by file URI"
+        onclick="storeSettings(); wizBootStrap.downloadThenBootStrapFromURL(
+                    'http://test.webdav.org/auth-basic',
+                    'user3',
+                    'user3')" />
+    <input type="button" id="custom_button" value="Switch to custom URL by file URI"
+        onclick="storeSettings(); wizBootStrap.downloadThenBootStrapFromURL(
+                    document.getElementById('urltextbox').value,
+                    document.getElementById('usertextbox').value,
+                    document.getElementById('passtextbox').value)" />
+      <br />
+      Custom URL:
+      <input type="text" id="urltextbox" value="http://" />
+    <br />
+      Username:
+    <input type="text" id="usertextbox" value="" />
+      <br />
+      Password:
+    <input type="text" id="passtextbox" value="" />
+  </body>
+</html>

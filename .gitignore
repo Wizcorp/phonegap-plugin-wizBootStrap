@@ -7,13 +7,13 @@ example/ios/www/*
 
 
 # Android Studio
-.iml
-.idea
-.externalToolBuilders
-/out/*
+*.iml
+*.idea
+*.externalToolBuilders
+example/android/out/*
 
 # Eclipse
-/bin/*
-/gen/*
+example/android/bin/*
+example/android/gen/*
 
 
