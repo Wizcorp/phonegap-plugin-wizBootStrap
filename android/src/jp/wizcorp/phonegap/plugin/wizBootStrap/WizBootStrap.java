@@ -1,5 +1,8 @@
 package jp.wizcorp.phonegap.plugin.wizBootStrap;
 
+import android.os.Handler;
+import android.webkit.WebView;
+import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.api.CallbackContext;
 import org.apache.cordova.api.CordovaPlugin;
 import org.json.JSONArray;
@@ -17,6 +20,8 @@ import android.util.Log;
 public class WizBootStrap extends CordovaPlugin {
 
     public static final String TAG = "WizBootStrap";
+    static Handler loadHandler;
+    static Runnable loadit;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -76,15 +81,22 @@ public class WizBootStrap extends CordovaPlugin {
      * @param showSplashScreen
      *            Boolean option to display splash screen or not
      */
-    public void load(String fileURI, Boolean showSplashScreen) {
-    	Log.d(TAG, "\nload with fileURI: " + fileURI + " \ndisplay splash: " + showSplashScreen);
-        if (showSplashScreen) {
-            // Load with splash
-            this.webView.loadUrl("javascript:cordova.exec(null, null, 'SplashScreen', 'show', []);");
-            this.webView.loadUrl(fileURI, 1);
-        } else {
-            // Perform load immediately
-            this.webView.loadUrl(fileURI);
-        }
+    public void load(final String fileURI, final Boolean showSplashScreen) {
+    	Log.d(TAG, " \nload with fileURI: " + fileURI + " \ndisplay splash: " + showSplashScreen);
+        cordova.getActivity().runOnUiThread(
+                new Runnable() {
+                    public void run() {
+                        Log.d(TAG, "Loading: " + fileURI);
+                        if (showSplashScreen) {
+                            // Load with splash
+                            webView.loadUrl("javascript:cordova.exec(null, null, 'SplashScreen', 'show', []);");
+                            webView.loadUrl(fileURI, 1);
+                        } else {
+                            // Perform load immediately
+                            webView.loadUrl(fileURI, 1);
+                        }
+                    }
+                }
+        );
     }
 }
