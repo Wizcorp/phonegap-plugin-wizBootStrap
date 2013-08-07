@@ -1,7 +1,7 @@
 /* WizBootStrap for PhoneGap - 
 *
  * @author Ally Ogilvie
- * @copyright WizCorp Inc. [ Incorporated Wizards ] 2012
+ * @copyright Wizcorp Inc. [ Incorporated Wizards ] 2012
  * @file - wizBootStrap.js
  * @about - JavaScript PhoneGap bridge for boot strapping
  *
@@ -57,16 +57,34 @@ var wizBootStrap = {
         var gotFileWriter = function (writer) {
             writer.onwrite = function(evt) {
                 console.log("write success");
+                console.log("window.location.href: " + window.location.href);
             };
             
             
             // If your root directory is not at www you may need to change your setup below
-            var newRelavantPath = window.location.href.match(/^.+\.app\/www\//)[0];
-            // "../../www/"
-            var replaceText = 'src="'+newRelavantPath;
+            // file:///var/application/sfasf879fs/Orko.app/assets/www/..
 
-            var updatedCode = request.responseText.replace(/src=\"/mg,replaceText);
-            writer.write( updatedCode );
+
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/android/)) {
+                var newRelavantPath = window.location.href.match(/^.+\android_asset\/www\//)[0];
+                // "../../www/"
+                var replaceText = 'src="' + newRelavantPath;
+
+                var updatedCode = request.responseText.replace(/src=\"/mg,replaceText);
+                writer.write( updatedCode );
+            } else if (ua.match(/ipad/) || ua.match(/ipod/) || ua.match(/iphone/)) {
+                var newRelavantPath = window.location.href.match(/^.+\.app\/www\//)[0];
+                // "../../www/"
+                var replaceText = 'src="' + newRelavantPath;
+
+                var updatedCode = request.responseText.replace(/src=\"/mg,replaceText);
+                writer.write( updatedCode );
+            } else {
+                // fall through, unidentified user agent!
+                alert ("unidentified user agent! -> " + ua);
+                return;
+            }
         }
         
         var fail = function (error) {
