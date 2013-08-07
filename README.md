@@ -4,7 +4,7 @@
 # phonegap-plugin-wizBootStrap 
 
 Cordova version : 2.7<br />
-last update : 22/07/2013<br />
+last update : 07/08/2013<br />
 
 ## Description
 
@@ -78,21 +78,33 @@ Project tree
 
 **Loading a new html page from a relative filename**
 
-Restart the cordova app using fileName as the Cordova startPage.
+Restart the cordova app using new html page as the Cordova startPage.
 		
 		wizBootStrap.load(String fileName, Boolean true/false);
 
-The fileName parameter is interpreted as a file name relative to the Cordova www folder name.
+The ```fileName``` parameter is interpreted as a file name *relative to the Cordova www* folder.
 
 - If a boolean value of true is passed, the splash screen will be shown.
 - If a boolean value of false is passed, the splash screen will not be shown.
 
 **Loading a new html page from a file URI**
+
 Restart the cordova app using fileuri as the Cordova startPage.
 
 		wizBootStrap.loadFromFileURI(String fileuri, Boolean true/false);
 
-The fileuri parameter is interpreted as an absolute file URI name. (eg. file:///)
+The ```fileuri``` parameter is interpreted as an absolute file URI name. (eg. file:///)
 
 - If a boolean value of true is passed, the splash screen will be shown.
 - If a boolean value of false is passed, the splash screen will not be shown.
+
+**Download an html page over HTTP and bootstrap**
+
+Download an HTML page form a website address into temporary chache, replace any matching ```src=``` attributes with relative paths.
+
+		wizBootStrap.downloadThenBootStrapFromURL(String url, String username, String password);
+		
+- ```url``` is any standard HTTP address.
+- ```username``` is the username for basic authentication (optional)
+- ```password``` is the password for basic authentication (optional)
+
