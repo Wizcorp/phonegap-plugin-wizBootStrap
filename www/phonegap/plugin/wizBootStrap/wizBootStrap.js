@@ -48,17 +48,27 @@ var wizBootStrap = {
         }
         
         var gotFileEntry = function (fileEntry) {
-            fileEntry.createWriter(gotFileWriter, fail);
+            fileEntry.createWriter(function (writer) {gotFileWriter(writer, fileEntry); }, fail);
             // alert( 'Created: ' + fileEntry.fullPath \nNow will reboot using the file.');
             // sets customSettings in localStorage
-            window.wizBootStrap.loadFromFileURI( fileEntry.fullPath, true );
+            setTimeout(function () {
+            	window.wizBootStrap.loadFromFileURI( fileEntry.fullPath, true );
+            }, 1500);
+            
         }
         
-        var gotFileWriter = function (writer) {
-            writer.onwrite = function(evt) {
+        var gotFileWriter = function (writer, fileEntry) {
+	        
+            writer.onwrite = function (evt) {
                 console.log("write success");
                 console.log("window.location.href: " + window.location.href);
+                // Callback success
+                onSuccess(fileEntry.fullPath);
             };
+            
+            writer.onerror = function (e) {
+	            onFailure(e);
+            }
             
             
             // If your root directory is not at www you may need to change your setup below
@@ -73,13 +83,7 @@ var wizBootStrap = {
 
                 var updatedCode = request.responseText.replace(/src=\"/mg,replaceText);
                 
-                // Callback success
-                onSuccess();
-                setTimeout(function () {
-                	// We allow a 2 second callback for anything you wish to clean up or set on
-                	// your boot screen
-                	writer.write( updatedCode );
-                }, 2000);
+                writer.write( updatedCode );
             } else if (ua.match(/ipad/) || ua.match(/ipod/) || ua.match(/iphone/)) {
                 var newRelavantPath = window.location.href.match(/^.+\.app\/www\//)[0];
                 // "../../www/"
@@ -87,17 +91,10 @@ var wizBootStrap = {
 
                 var updatedCode = request.responseText.replace(/src=\"/mg,replaceText);
                 
-                // Callback success
-                onSuccess();
-                setTimeout(function () {
-                	// We allow a 2 second callback for anything you wish to clean up or set on
-                	// your boot screen
-                	writer.write( updatedCode );
-                }, 2000);
+                writer.write( updatedCode );
             } else {
                 // fall through, unidentified user agent!
                 alert ("unidentified user agent! -> " + ua);
-                onFailure();
             }
         }
         

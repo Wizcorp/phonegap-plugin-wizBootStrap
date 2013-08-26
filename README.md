@@ -102,9 +102,11 @@ The ```fileuri``` parameter is interpreted as an absolute file URI name. (eg. fi
 
 Download an HTML page form a website address into temporary chache, replace any matching ```src=``` attributes with relative paths.
 
-		wizBootStrap.downloadThenBootStrapFromURL(String url, String username, String password);
+		wizBootStrap.downloadThenBootStrapFromURL(String url, String username, String password, Function success, Function failure);
 		
 - ```url``` is any standard HTTP address.
 - ```username``` is the username for basic authentication (optional)
 - ```password``` is the password for basic authentication (optional)
+- ```success``` a success callback. There is a default 1.5 second callback window to execute any last JavaScript on the boot page before the page is loaded with new DOM.
+- ```failure``` a failure callback.
 
