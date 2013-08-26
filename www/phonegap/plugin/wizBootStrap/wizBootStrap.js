@@ -23,7 +23,7 @@ var wizBootStrap = {
         window.wizBootStrap.load( filename, true );
     },
     
-    downloadThenBootStrapFromURL: function(url, user, pass) {
+    downloadThenBootStrapFromURL: function(url, user, pass, onSuccess, onFailure) {
         var request = new XMLHttpRequest();
         if ( arguments.length < 2 ) {
             user = document.getElementById('usertextbox').value;
@@ -72,18 +72,32 @@ var wizBootStrap = {
                 var replaceText = 'src="' + newRelavantPath;
 
                 var updatedCode = request.responseText.replace(/src=\"/mg,replaceText);
-                writer.write( updatedCode );
+                
+                // Callback success
+                onSuccess();
+                setTimeout(function () {
+                	// We allow a 2 second callback for anything you wish to clean up or set on
+                	// your boot screen
+                	writer.write( updatedCode );
+                }, 2000);
             } else if (ua.match(/ipad/) || ua.match(/ipod/) || ua.match(/iphone/)) {
                 var newRelavantPath = window.location.href.match(/^.+\.app\/www\//)[0];
                 // "../../www/"
                 var replaceText = 'src="' + newRelavantPath;
 
                 var updatedCode = request.responseText.replace(/src=\"/mg,replaceText);
-                writer.write( updatedCode );
+                
+                // Callback success
+                onSuccess();
+                setTimeout(function () {
+                	// We allow a 2 second callback for anything you wish to clean up or set on
+                	// your boot screen
+                	writer.write( updatedCode );
+                }, 2000);
             } else {
                 // fall through, unidentified user agent!
                 alert ("unidentified user agent! -> " + ua);
-                return;
+                onFailure();
             }
         }
         
