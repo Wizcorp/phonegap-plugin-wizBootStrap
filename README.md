@@ -1,6 +1,5 @@
 
 
-
 # phonegap-plugin-wizBootStrap 
 
 Cordova version : 2.7<br />
@@ -100,7 +99,7 @@ The ```fileuri``` parameter is interpreted as an absolute file URI name. (eg. fi
 
 **Download an html page over HTTP and bootstrap**
 
-Download an HTML page form a website address into temporary chache, replace any matching ```src=``` attributes with relative paths.
+Download an HTML page form a website address into temporary cache, then replace any matching ```src=``` attributes with relative paths to the appplication ```/www``` folder.
 
 		wizBootStrap.downloadThenBootStrapFromURL(String url, String username, String password, Function success, Function failure);
 		
